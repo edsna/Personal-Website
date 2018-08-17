@@ -1,0 +1,415 @@
+.header{
+	position: relative;
+	max-width: 100%;
+	background-color: #F1F1F1;
+	border-bottom-color: #E5E5E5;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-left-color: #E5E5E5;
+	border-right-color: #E5E5E5;
+	border-top-color: #E5E5E5;
+	color: #222;
+	font-family: arial,sans-serif;
+	font-size: 13px;
+	height: 59px;
+	visibility: visible;
+	margin-right: 0px !important;
+	margin-left: 0px !important;
+	display: block;
+		float: right;
+		height: 98px;
+		background-color: #ffffff;	
+	border-bottom: none;
+}
+.Links_Left{
+	float: left;
+	background-color: white;
+	color: blue;
+}
+
+.testing{
+	background-color: white;
+}
+
+.listsClass{
+	background-color: white;
+	margin: 10px;
+	font-weight: 600px;
+}
+
+/*
+.MyProfilePicture {
+  border-radius: 50%;
+  /*margin: 20px;*/
+  /*margin-left:20px;
+  overflow: hidden;
+  position: relative;
+  height: 32px;
+  width: 32px;
+  z-index: 0;
+  cursor: pointer;
+}
+*/
+
+
+.Links_Right{
+	display: block;
+	float: right;
+	padding: 0px;
+	}
+
+.Awards{
+    /*margin: 0px;
+    padding: 0px;*/
+    
+	display: inline-block;
+	margin-right: 17px;
+	margin-top: 17px;
+	cursor: pointer;
+}
+	
+.MenuClass{
+	display: inline-block;
+	margin-right: 17px;
+	cursor: pointer;
+
+}
+
+  /*SIZE OF WINDOW WHEN IT COMES OUT-AFTER CLICKED*/
+.dropdown_content{
+	display: none;
+	/*z-index: 1000;*/
+	position: absolute;
+	width: 180px; 
+	margin-left: -207px;
+	margin-top: 9px;
+	border: 1px solid #ccc !important;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-bottom: 0px;
+	cursor: default;
+}
+
+.dropdown_pin{
+	margin-top: -12px;
+	margin-left: 177px;
+}
+
+.dropdown_content a:hover {}
+
+.show {
+	display:block;
+	}
+
+.toggler_button:hover .dropdown_content {
+    display: block;
+}
+
+
+.More{
+	background-color: #f1f1f1;
+	margin: 0px;
+	padding: 0px;
+	float: center;
+	text-align: center;
+}
+
+ .dropdownList{
+	border: 0;
+    color: inherit;
+ }
+  
+.ProfilePictureDropdown{
+	display: none;
+	/*z-index: 1000;*/
+	position: absolute;
+	width: 300px; 
+	margin-left: -207px;
+	margin-top: 9px;
+	border: 1px solid #ccc !important;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-bottom: 30px;
+	cursor: default;
+}
+
+
+
+
+
+.MyGoogleProfile{
+	
+}
+  
+.My_Resume {
+    display: inline-block;
+    margin-right: 10px;
+	color: #000;
+	outline: none;
+}
+  
+
+  
+.SearchHomeBar {
+	font-family: "Lucida Sans Typewriter", "Lucida Console", monaco, "Bitstream Vera Sans Mono", monospace;
+	font-size: 14px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 15.4px;
+	max-width: 586px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+	min-height: 38px;
+	border: 1px solid #4d90fe;
+	padding-top: 5px;
+	padding-right: 9px;
+	padding-bottom: 0px;
+	padding-left: 9px;
+}
+
+.WAShome-logo{
+	display: block;
+    margin: 0 auto;
+}
+
+.Home_logo{
+	/*transform: translate(50%,50%);*/
+}
+
+.Home_logo img {
+	/*widows: 243;*/
+	height: 180px;
+	margin-right: auto;
+	margin-left: auto;
+	/*margin: 400x;*/
+	margin-top: 100px;
+	/*width: 50%;*/
+	margin-left: 150px;
+}
+
+.My_Name{
+	/*margin-left:500;
+	style="padding-top:109px; align=middle; width= 272; height= 92;
+	style="height:233px;margin-top:89px"
+	*/
+	resize: both;
+	margin-right: auto;
+	margin-left: auto;
+	float: inherit;
+	/*transform: translate(-50*/
+	
+	/*vertical-align: middle;*/
+	
+}
+
+.otario{
+	font-family: "Lucida Sans Typewriter";
+	font-size: 14px;
+	
+}
+
+
+body {
+  -webkit-user-select: none;
+  background: none transparent;
+  color: #323232;
+  margin: 0;
+  overflow: scroll;
+  padding: 0;
+  
+}
+
+a,
+a:active,
+a:hover,
+a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+#otario{
+	background-color:red;
+}
+
+#tiles{
+
+  -webkit-user-select: none;
+  font-size: 0;
+  /* Two rows of tiles of 128px each, and 16px of spacing between the rows.
+   * If you change this, also change the corresponding values in
+   * local_ntp.css. */
+  height: calc(2*128px + 46px);
+  
+  margin: 4px 0 8px 0;
+  opacity: 1;
+  position: relative;
+  /* This align correctly for both LTR and RTL */
+  text-align: -webkit-auto;
+  transition: opacity 1s;
+  width:524;
+  
+}
+
+.tile_region,
+.mv-empty-tile {
+  border-radius: 2px;
+  box-sizing: border-box;
+  display: inline-block;
+  font-family: arial, sans-serif;
+  font-size: 12px;
+  height: 128px;
+  line-height: 100%;
+  margin: 0 8px;
+  opacity: 1;
+  overflow: hidden;
+  position: relative;
+  vertical-align: top;
+  white-space: nowrap;
+  width: 154px;
+  bottom: 8px;
+}
+
+.tile_region {
+  background: #f1f1f1;
+  margin:10px;
+  
+}
+
+.mv-empty-tile {
+  background: rgb(245,245,245);
+}
+
+.page_overview-title {
+  height: 15px;
+  left: 31px;
+  line-height: 14px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  text-overflow: ellipsis;
+  top: 9px;
+  width: 120px;
+  color: blue;
+  
+  
+}
+
+.page_overview {
+  cursor: pointer;
+  display: block;
+  height: 96px;
+  overflow: hidden;
+  position: absolute;
+  top: 32px;
+  width: 154px;
+  
+}
+
+.page_overview img {
+  height: auto;
+  min-height: 100%;
+  width: 100%;
+  
+}
+
+.LogoNewTab {
+  left: 7px;
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+}
+
+#my_tabs{
+	height: calc(2*128px + 36px);
+	width:462;
+	-webkit-user-select: none;
+    margin: 0;
+    text-align: -webkit-center;
+	width:510px; 
+	margin:0 auto;
+	top: 32px;
+	margin-top:10px;
+	/*resize: both;
+    overflow: auto;*/
+		
+}
+
+.footer{
+	color: #666;
+	font-family: arial,sans-serif;
+	font-size: small;
+	text-decoration: none;	
+	display: inline-block;
+	margin: 2px 2px 0px;
+	background-color: #f1f1f1;
+}
+
+.footer_container{
+	position:absolute;
+    width:100%;
+    bottom:0px;
+	background-color: #f1f1f1;
+	font-family: arial,sans-serif;	
+	font-size: small;
+	/*margin-left: -27px;*/
+	font-family: arial,sans-serif;
+}
+
+.Social_Networks{
+	padding-top: 2px;
+	list-style-type: none;
+    width: 100%;
+    background-color: #f1f1f1;
+	float: center;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #f1f1f1;
+	width: 100%;
+}
+
+li {
+
+    float: center;
+	display: inline; 
+}
+
+li a {
+    display: inline-block;
+    text-align: center;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+li a:hover {
+	color: blue;
+	text-decoration: underline;
+    
+}
+
+.FirstSection{
+	display: inline;
+	margin: 5px;
+}
+
+.SecondSection{
+	display: inline;
+	margin: 5px;
+}
+
+
+.wrapperClass {
+    margin: 0 auto 0px; 
+    /* the bottom margin is the negative value of the footer's height */
+    height: auto !important;
+	min-height: 100%;
+	height: 100%;
+	width: 100%;
+}

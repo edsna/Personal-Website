@@ -1,0 +1,306 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
+  
+<html lang="en" dir="ltr">
+<!--REMEMBER TO ADD THIS PROPERTY IN THE CSS HOMEPAGE'S STYLESHEET-->	
+
+<head>
+		<meta charset="utf-8">
+		 
+		<!--FAVICON-->
+		<link rel="shortcut icon" href="http://www.edsonz.domains.trincoll.edu/images/favicon-16x16.png" type="image/png" />
+			
+			<title>Edson Zandamela | Student </title>
+		  
+			<!--HOME PAGE'S STYLESHEET-->
+			<link rel="stylesheet" type="text/css" href="MainStyle.css"/>		  
+			<!--PROFILE PICTURE DROPDOWN STYLESHEET-->
+			<link rel="stylesheet" type="text/css" href="PPDropdown.css"/>
+			
+			<!--Google Analytics tracking Snipset -->
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30871755-2"></script>
+            <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+            
+              gtag('config', 'UA-30871755-2');
+            </script>
+
+</head>
+
+<body>
+	<div class="wrapperClass" id="wrapperId">
+		
+		<!--BEG OF HEADER-->
+		<header class="headerClass" id="HeaderId">
+		
+		<!--BEG LINKS ON THE LEFT-->
+		<div class="Links_Left">
+			<nav class="testing">
+				<ul class="listsClass">
+					<li class="listsClass"><a href="https://www.edsonz.domains.trincoll.edu/" title="Homepage">Home</a></li>					
+					<li class="listsClass"><a target="_blank" href="https://www.appfolio.edsonz.domains.trincoll.edu/" title="MobileApps Collection">Appfolio</a></li>
+					<li class="listsClass"><a target="_blank" href="https://www.webfolio.edsonz.domains.trincoll.edu/" title="Websites Collection">Webfolio</a></li>
+					<li class="listsClass"><a target="_blank" href="https://progectoscaseiros.blogspot.com/p/engenhocas.html" title="publications & Creations">Blog</a></li>
+					<li class="listsClass"><a target="_blank" href="https://www.contact.edsonz.domains.trincoll.edu/">Contact</a></li>
+
+				</ul>	
+		</nav>
+		</div>
+		<!--END OF LINKS ON THE LEFT-->
+
+			
+			<!--BEG OF LINKS ON THE RIGHT-->
+				<div class="Links_Right">
+										
+					<!--BEG OF AWARDS BUTTON-->
+					
+					<!--	<div class="Awards">
+							<a target="_blank" title="Awards" href="http://www.christmasgift.edsonz.domains.trincoll.edu/"><img alt="Edson's Awards" src="http://www.edsonz.domains.trincoll.edu/images/awards-32x32.png" border=0></a>
+						</div>
+					<!--End of AWARDS BUTTON-->
+				
+					<section id="" class="">
+						
+
+						<!--BEG MY_APPS BUTTON-->
+						<div class="MenuClass">
+							<!--MENU BUTTON ICON-->							
+							<img onclick="myFunction()" class="toggler_button" alt="My_Apps" src="http://www.edsonz.domains.trincoll.edu/images/Menu.png">
+							
+								<!--DROPDOWN LIST CONTENT-->
+								<div id="myDropdown" class="dropdown_content">
+									
+									<div class="dropdown_pin">
+										<img border="0" src="http://www.edsonz.domains.trincoll.edu/images/MenuPin.png">
+									</div>
+
+									<div class="">
+										<div class="FirstSection">
+											<a target="_blank" title="Christmas Gift" href="http://www.christmasgift.edsonz.domains.trincoll.edu/"><img alt="Christmas Gift" src="http://www.edsonz.domains.trincoll.edu/images/favChrist32x32.png" border=0></a>
+										</div>
+										
+										<div class="FirstSection">
+											<a target="_blank" title="Appreciation Gift" href="http://www.appreciationgift.edsonz.domains.trincoll.edu/"><img alt="Appreciation Gift" src="http://www.edsonz.domains.trincoll.edu/images/favapprec32x32.png" border=0></a>
+										</div>
+										
+										<div class="FirstSection">
+											<a target="_blank" title="Birthday Gift" href="http://www.birthdaygift.edsonz.domains.trincoll.edu/"><img alt="Birthday Gift" src="http://www.edsonz.domains.trincoll.edu/images/favBirth32x32.png" border=0></a>
+										</div>
+									</div>
+
+									<div class="">
+										<div class="SecondSection">
+											<a target="_blank" title="Twitter" href="http://www.twitter.com/Edsn_Aguiar"><img alt="Follow me on twitter" src="http://www.edsonz.domains.trincoll.edu/images/Twitter32.png" border=0></a>
+										</div>
+										<div class="SecondSection">
+											<a target="_blank" title="COLL-220 Portfolio" href="http://edsonz.domains.trincoll.edu/Portfolio/"><img alt="COLL-220 Portfolio" src="http://www.edsonz.domains.trincoll.edu/images/WordPress32x32.png" border=0></a>
+										</div>
+										
+										<div class="SecondSection">
+											<a target="_blank" title="Blog" href="http://progectoscaseiros.blogspot.com/"><img alt="Explore my Publications" src="http://www.edsonz.domains.trincoll.edu/images/blogger_32x32.png" border=0></a>
+										</div>
+										
+									</div>
+									
+									<div class="MoreButton">
+										<div class="More">
+											<p class="MorePar">More</p>
+										</div>
+									</div>
+									
+								</div>
+								<!--END OF DROPDOWN CONTENT-->
+						</div>
+						<!--END OF MY_APPS BUTTON CONTENT-->
+
+						
+						<!--BEG OF MY_APPS BUTTON's LOGIC-->
+						<script>
+								/* When the user clicks on the button, 
+								toggle between hiding and showing the dropdown content */
+								function myFunction() {
+									document.getElementById("myDropdown").classList.toggle("show");
+								}
+
+								// Close the dropdown if the user clicks outside of it
+								window.onclick = function(event) {
+								  if (!event.target.matches('.toggler_button')) {
+
+									var dropdowns = document.getElementsByClassName("dropdown_content");
+									var i;
+									for (i = 0; i < dropdowns.length; i++) {
+									  var openDropdown = dropdowns[i];
+									  if (openDropdown.classList.contains('show')) {
+										openDropdown.classList.remove('show');
+									  }
+									}
+								  }
+								}
+								
+						</script>
+						<!--END OF MY_APPS BUTTON's LOGIC-->
+					
+					<!--BEG OF PROFILE PICTURE-->
+						<div class="ProfileDropdown">
+						
+							<img src="https://www.edsonz.domains.trincoll.edu/images/EdsonProfile.png" onclick="PpFunction()" class="dropPict">
+							<!--BEG OF DROPDOWN CONTENT-->
+								<div id="PpDropdown" class="dropdown-content">									
+									<div class="PPdropdown_pin">
+										<img border="0" src="http://www.edsonz.domains.trincoll.edu/images/MenuPin.png">
+									</div>
+														
+									<div class="dropdownPP">
+										<img class="drpdPP" border="0" src="https://www.edsonz.domains.trincoll.edu/images/EdsonProfile.png">
+									</div>
+																
+						  <!--THIS HAVE TO BE ON THE LEFT OF MY PROFILE PICTURE ABOVE-->
+									<div class="BasicInfo">
+										<div>
+											<p class="MyName"> Edson Zandamela </p>
+										</div>
+										
+										<div class="MyEmail">
+											<p>edson.zandamela@trincoll.edu</p>
+										</div>
+										
+										<div class="MyGoogleProfile">
+											<a href="https://plus.google.com/u/0/+EdsonZandamelaa" style="color: blue;">Google+ Profile </a>
+										</div>
+																		
+										<div class="PotentialButtons">
+											<!--BUTTON SHOULD BE AROUND HERE-->
+										</div>
+									</div>
+								</div>
+								<!--END OF DROPDOWN CONTENT-->
+						</div>
+						<!--END OF PROFILE PICTURE MENU-->
+					</section>
+					<!--END OF SECTION FOR LINKS ON THE RIGHT-->
+				</div>
+				<!--END OF LINKS ON THE RIGHT DIV-->
+		</header>
+		<!--END OF HEADER-->
+    
+	<!--BEG OF SEARCH & MY TAB's SECTION-->
+    <section class="">
+		<!--HOMEPAGE's LOGO-->
+		<div class="Home_logo">
+			<img alt="Edson Zandamela" class="My_Name" src="http://www.edsonz.domains.trincoll.edu/images/Edson_Zandamela.png" />
+		</div>
+		
+		<!--BEG OF SEARCH BAR-->
+		<div class="SearchHomeBar">
+			<div id="typed-strings">
+				<p style="display:none;" style="font-family: Lucida Sans Typewriter" >Hi,</p>
+					<p style="display:none;">My name is Edson de Aguiar Zandamela</p>
+					<p style="display:none;">I am a Computer Science & Psychology double major at Trinity College</p>
+					<p style="display:none;">I am passionate about the intersection between</p>
+					<p style="display:none;"> Human - computer interaction, AI and Software Engineering,</p>
+					<p style="display:none;">and I love experimenting in my fields of study</p>
+					<p style="display:none;">Explore some of my work below</p>
+					<p style="display:none;"> And reach out to me if you find it interesting</p>
+					<p style="display:none;">Thanks for your time!</p>
+					<p>Regards,</p>
+					<p>Edson!</p>
+				
+			</div>
+			<span id="typed"></span>
+		</div>
+		<!--END OF SEARCH BAR-->
+		
+		<!--BEG OF NEW TAB WINDOWS-->
+		<div class="New_Tab_Windows">
+			<div id="my_tabs">
+				<div id="tiles" style="opacity: 1;">
+					<a target="_blank" class="tile_region" data-tid="1" href="https://www.webfolio.edsonz.domains.trincoll.edu/" aria-label="Edson's Websites Collection" title="Edson's Website Collection">
+						<div class="LogoNewTab"><img src="http://www.edsonz.domains.trincoll.edu/images/favicon-16x16.png" title=""></div>
+						<div class="page_overview-title" style="direction: ltr;">Edson's Webfolio</div>
+						<div class="page_overview"><img src="https://www.edsonz.domains.trincoll.edu/images/Webfolio.png" alt="Testing Size" style="width:154px;height:16px;"></div>
+						
+					</a>
+					
+					<a target="_blank" class="tile_region" data-tid="1" href="http://progectoscaseiros.blogspot.com/" aria-label="Edson's Publications" title="Edson's Publications">
+						<div class="LogoNewTab"><img src="http://www.edsonz.domains.trincoll.edu/images/favicon-16x16.png" title=""></div>
+						<div class="page_overview-title" style="direction: ltr;">Edson's Blog</div>
+						<div class="page_overview"><img src="https://www.edsonz.domains.trincoll.edu/images/BlogHome.png" alt="Testing Size" style="width:154px;height:16px;"></div>
+						
+					</a>
+					
+					<a target="_blank" class="tile_region" data-tid="1" href="https://www.appfolio.edsonz.domains.trincoll.edu/" aria-label="Edson's MobileApp Collection" title="Edson's Mobile Apps Collection">
+						<div class="LogoNewTab"><img src="http://www.edsonz.domains.trincoll.edu/images/favicon-16x16.png" title=""></div>
+						<div class="page_overview-title" style="direction: ltr;">Edson's Appfolio</div>
+						<div class="page_overview"><img src="https://www.edsonz.domains.trincoll.edu/images/Appfolio.png" alt="Testing Size" style="width:154px;height:16px;"></div>
+						
+					</a>
+					
+					<a target="_blank" class="tile_region" data-tid="1" href="http://edsonz.domains.trincoll.edu/Portfolio/" aria-label="Edson's Website Collection" title="Coll 220 Portfolio">
+						<div class="LogoNewTab"><img src="http://www.edsonz.domains.trincoll.edu/images/favicon-16x16.png" title=""></div>
+						<div class="page_overview-title" style="direction: ltr;">Under Construction</div>
+						<div class="page_overview"><img src="https://www.edsonz.domains.trincoll.edu/images/Portfolio.png" alt="Testing Size" style="width:154px;height:16px;"></div>
+						
+					</a>
+					<a target="_blank" class="tile_region" data-tid="1" href="https://www.youtube.com/user/Edsnaguiar/videos?view_as=subscriber" aria-label="Edson's YouTube Channel" title="Edson's YouTube Channel">
+						<div class="LogoNewTab"><img src="http://www.edsonz.domains.trincoll.edu/images/favicon-16x16.png" title=""></div>
+						<div class="page_overview-title" style="direction: ltr;">Edson's YouTube Channel</div>
+						<div class="page_overview"><img src="https://www.edsonz.domains.trincoll.edu/images/YouTubeChannel.png" alt="Testing Size" style="width:154px;height:16px;"></div>
+						
+					</a>
+					<a target="_blank" class="tile_region" data-tid="1" href="http://progectoscaseiros.blogspot.com/p/cursos-online.html" aria-label="Edson's Online Courses" title="Edson's Online Courses">
+						<div class="LogoNewTab"><img src="http://www.edsonz.domains.trincoll.edu/images/favicon-16x16.png" title=""></div>
+						<div class="page_overview-title" style="direction: ltr;">Edson's Online Courses</div>
+						<div class="page_overview"><img src="https://www.edsonz.domains.trincoll.edu/images/OnlineCourses.png" alt="Testing Size" style="width:154px;height:16px;"></div>
+						
+					</a>					
+				</div>
+			</div>
+		</div>
+		<!--END OF NEW TAB WINDOWS-->
+		
+		<!--BEG OF SEARCH BAR's LOGIC-->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+			<script>
+					  $(function(){
+								$("#typed").typed({
+							stringsElement: $('#typed-strings'),
+							contentType: 'html',
+							typeSpeed: 50,
+							startDelay: 500
+							});
+					  });
+			</script>
+			<!--END OF SEARCH BAR's LOGIC-->
+	</section>
+	<!--END OF MY FAV TAB's LOGIC-->
+
+
+	<!--BEG OF FOOTER-->
+	<footer role="navigation" class="footer_container">
+		
+		<div class="Social_Networks">
+			<ul style="text-align: center; padding-top: 10px; ">
+									<li><a target="_blank" title="LinkedIn" href="http://www.linkedin.com/in/edsonzandamela/"><img alt="LinkedIn" src="http://www.edsonz.domains.trincoll.edu/images/linkedin_32x32.png" border=0></a></li>
+									<li><a target="_blank" title="Github" href="http://github.com/edsna"><img alt="Github" src="http://www.edsonz.domains.trincoll.edu/images/github_32x32.png" border=0></a></li>
+									<li><a target="_blank" title="Explore my Publications" href="http://progectoscaseiros.blogspot.com/"><img alt="Explore my Publications" src="http://www.edsonz.domains.trincoll.edu/images/blogger_32x32.png" border=0></a></li>
+									<li><a target="_blank" title="Google + " href="http://plus.google.com/u/0/+EdsonZandamelaa"><img alt="Visit my Profile" src="http://www.edsonz.domains.trincoll.edu/images/google+_c32x32.png" border=0></a></li>
+									<li><a target="_blank" title="Explore my Channel" href="http://www.youtube.com/c/EdsonZandamelaa"><img alt="Explore my Publications" src="http://www.edsonz.domains.trincoll.edu/images/youtube32x32.png" border=0></a></li>
+									<li><a target="_blank" title="COLL-220 Portfolio" href="http://edsonz.domains.trincoll.edu/Portfolio/"><img alt="COLL-220 Portfolio" src="http://www.edsonz.domains.trincoll.edu/images/WordPress32x32.png" border=0></a></li>										
+			</ul>
+	
+	<marquee behavior="alternate" direction="right" scrollamount="2">
+		<p class="footer">COPYRIGHT © 2017 All rights reserved to <a href="mailto:edson.zandamela@trincoll.edu">Edson Zandamela</a> </p>
+	</marquee>
+		</div>
+	</footer>
+  <!--END OF FOOTER-->
+</div>
+<!--END OF WRAPPER-->
+
+<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="PPDropdownLogic.js"></script>
+<script type="text/javascript" src="SearchBar.js"></script>
+</body>
+</html>
