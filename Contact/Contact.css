@@ -1,0 +1,155 @@
+MoreDetailsh1{
+    text-align: center;
+    font-family: Lucida Calligraphy;
+}
+
+.EmailForm{
+	float:left; 
+    width: 50%;
+    padding: 20px;
+/*    background-color: #ff0000;*/
+    /*margin: 5px;*/
+    /*height: 400px;*/
+}
+
+
+.MoreDetails{
+	float:right;
+/*	background-color: green;*/
+	width: 50%;
+	border: 1px solid #ccc !important;
+	padding: 20px;
+	/*margin: 5px;*/
+/*	max-width: 400p;*/
+}
+
+.heading{
+        font-family: Lucida Calligraphy;
+}
+
+ul{
+    display: inline;
+}
+
+p1{
+    padding:5px;
+}
+
+p5{
+    display: inline;
+}
+
+
+.Foto{
+    text-align: center;
+    /*width: 200px;
+    height: 200px;*/
+}
+
+img{
+	/*height:200px;
+	width:200px;*/
+	align: middle;
+/*	border: 3px solid #73AD21;*/
+	
+}
+
+
+
+.Picture{
+     float: center;
+     text-align: center;
+    /*width: 400px;
+    height: 400px;*/
+     
+}
+
+.Edson{
+    width: 350px;
+    height: 350px;
+}
+
+.container{
+    width: 100%;
+    height: 100%;
+}
+
+#Salientar{
+	color: #808080;
+}
+
+li{
+	display: inline;
+}
+
+#zero{
+	color:blue;
+}
+
+#um{
+	color:red;
+}
+
+#dois{
+	color:green;
+}
+
+#tres{
+	color:blue;
+}
+
+#quatro{
+	color:green;
+}
+
+#cinco{
+	color:red;
+}
+
+#seis{
+	color:blue;
+}
+
+#sete{
+	color:green;
+}
+
+#oito{
+	color:blue;
+}
+
+#nove{
+	color:red;
+}
+
+#dez{
+	color:blue;
+}
+
+#onze{
+	color:green;
+}
+
+#doze{
+	color:blue;
+}
+
+#SkypeButton_Call_edsonaguiar3_1{
+    display: inline;
+    float: right;
+    text-align: center;
+    /*margin: 20px;*/
+}
+    
+}
+
+
+/*
+li a:hover {
+	color: blue;
+	text-decoration: underline;
+    
+}
+*/
+
+
