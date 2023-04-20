@@ -5,6 +5,6 @@ responsive platform where users can get to know more about my interests, explore
 avaialble on my GitHub account..
 
 Web Application is not yet mobile friendly. To see its updated version, visit 
-http://edsonz.domains.trincoll.edu/
+https://edsonzandamela.com/
 or 
 https://github.com/edsna/Personal_Website_Update-Mobile_Friendly/tree/master
