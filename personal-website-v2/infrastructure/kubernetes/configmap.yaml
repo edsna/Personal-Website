@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-config
+  namespace: edson-portfolio
+data:
+  calendar_link: "https://calendly.com/edsonzandamela"
+  resume_pdf: "/resume.pdf"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+  namespace: edson-portfolio
+data:
+  max_tokens_per_day: "50"
+  max_requests_per_minute: "3"
+  max_messages_per_day: "10"
+  log_level: "INFO"
+  environment: "production"
