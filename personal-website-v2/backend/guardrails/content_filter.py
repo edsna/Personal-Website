@@ -3,7 +3,7 @@
 import re
 from typing import Tuple
 import structlog
-from langchain_openai import ChatOpenAI
+from utils.llm_provider import get_classifier_llm
 from langchain.prompts import ChatPromptTemplate
 import os
 
@@ -36,22 +36,15 @@ class ContentFilter:
     """Content filtering and topic classification"""
 
     def __init__(self):
-        self.llm = None
-        api_key = os.getenv("OPENAI_API_KEY")
-
-        if api_key:
-            try:
-                self.llm = ChatOpenAI(
-                    model="gpt-3.5-turbo",
-                    temperature=0.0,
-                    max_tokens=10,
-                )
-                logger.info("content_filter_initialized", model="gpt-3.5-turbo")
-            except Exception as e:
-                logger.warning("llm_init_failed", error=str(e))
-                self.llm = None
-        else:
-            logger.warning("openai_api_key_not_found")
+        try:
+            self.llm = get_classifier_llm()
+            if self.llm:
+                logger.info("content_filter_initialized")
+            else:
+                logger.warning("content_filter_no_llm")
+        except Exception as e:
+            logger.warning("llm_init_failed", error=str(e))
+            self.llm = None
 
     async def validate_input(self, text: str) -> Tuple[bool, str]:
         """

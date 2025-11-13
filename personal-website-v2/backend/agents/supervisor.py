@@ -4,10 +4,10 @@ import os
 import uuid
 import structlog
 from typing import Optional, Dict, Any
-from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 from pydantic import BaseModel
 
+from utils.llm_provider import get_classifier_llm
 from .career_agent import CareerAgent
 from .technical_agent import TechnicalAgent
 from .general_agent import GeneralAgent
@@ -35,30 +35,22 @@ class SupervisorAgent:
     """
 
     def __init__(self):
-        self.llm = None
-        api_key = os.getenv("OPENAI_API_KEY") or os.getenv("ANTHROPIC_API_KEY")
+        try:
+            # Initialize routing LLM (uses classifier - small and fast)
+            self.llm = get_classifier_llm()
 
-        if api_key:
-            try:
-                # Initialize routing LLM
-                self.llm = ChatOpenAI(
-                    model="gpt-3.5-turbo",
-                    temperature=0.0,
-                    max_tokens=50,
-                )
+            # Initialize specialized agents
+            self.career_agent = CareerAgent()
+            self.technical_agent = TechnicalAgent()
+            self.general_agent = GeneralAgent()
 
-                # Initialize specialized agents
-                self.career_agent = CareerAgent()
-                self.technical_agent = TechnicalAgent()
-                self.general_agent = GeneralAgent()
-
+            if self.llm:
                 logger.info("supervisor_agent_initialized")
+            else:
+                logger.warning("supervisor_initialized_without_llm")
 
-            except Exception as e:
-                logger.error("supervisor_init_failed", error=str(e))
-                self.llm = None
-        else:
-            logger.warning("no_api_key_found_for_supervisor")
+        except Exception as e:
+            logger.error("supervisor_init_failed", error=str(e))
             self.llm = None
 
     async def route_query(self, query: str) -> str:

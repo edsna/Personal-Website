@@ -2,11 +2,11 @@
 
 import os
 import structlog
-from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 
-logger = structlog.get_logger()
+from utils.llm_provider import get_llm
 
+logger = structlog.get_logger()
 TECHNICAL_DATA = """
 ## Core Technical Skills
 
@@ -73,20 +73,15 @@ class TechnicalAgent:
     """Agent specialized in technical skills and projects"""
 
     def __init__(self):
-        self.llm = None
-        api_key = os.getenv("OPENAI_API_KEY")
-
-        if api_key:
-            try:
-                self.llm = ChatOpenAI(
-                    model="gpt-3.5-turbo",
-                    temperature=0.3,
-                    max_tokens=300,
-                )
+        try:
+            self.llm = get_llm(temperature=0.3, max_tokens=300)
+            if self.llm:
                 logger.info("technical_agent_initialized")
-            except Exception as e:
-                logger.error("technical_agent_init_failed", error=str(e))
-                self.llm = None
+            else:
+                logger.warning("technical_agent_no_llm")
+        except Exception as e:
+            logger.error("technical_agent_init_failed", error=str(e))
+            self.llm = None
 
     async def process(self, query: str, language: str = "en") -> str:
         """Process technical query"""
