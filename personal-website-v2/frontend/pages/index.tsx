@@ -3,6 +3,9 @@ import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import Terminal from '@/components/Terminal'
+import ChatBot from '@/components/ChatBot'
+import ConsultingServices from '@/components/ConsultingServices'
+import ContactForm from '@/components/ContactForm'
 
 // Dynamically import Three.js components (client-side only)
 const NeuralBackground = dynamic(() => import('@/components/NeuralBackground'), {
@@ -331,26 +334,32 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* Chat Section Placeholder */}
+        {/* Consulting Services Section */}
+        <section className="min-h-screen flex items-center justify-center px-4 py-12 bg-gradient-neural">
+          <div className="max-w-7xl w-full">
+            <ConsultingServices language="en" />
+          </div>
+        </section>
+
+        {/* Chat Section */}
         <section id="chat" className="min-h-screen flex items-center justify-center px-4 py-12">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="max-w-3xl w-full glass-strong rounded-lg p-8 text-center"
+            className="w-full"
           >
-            <h2 className="text-4xl font-bold text-neural-blue mb-6">
-              Edson's Minion 🤖
+            <h2 className="text-4xl font-bold text-neural-blue mb-8 text-center">
+              Chat with Edson's Minion 🤖
             </h2>
-            <p className="text-gray-300 text-lg mb-8">
-              AI-powered chatbot coming soon! Ask me anything about Edson's experience,
-              skills, and projects.
-            </p>
-            <p className="text-sm text-gray-400">
-              This feature will be available once the backend RAG system is deployed.
-            </p>
+            <ChatBot language="en" />
           </motion.div>
+        </section>
+
+        {/* Contact Section */}
+        <section className="min-h-screen flex items-center justify-center px-4 py-12">
+          <ContactForm language="en" />
         </section>
 
         {/* Footer */}
