@@ -30,6 +30,9 @@ services:
       - HOST=0.0.0.0
       - ENVIRONMENT=development
       - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_BASE_URL=${OPENAI_BASE_URL}
+      - OPENAI_MODEL=${OPENAI_MODEL}
+      - OPENAI_CLASSIFIER_MODEL=${OPENAI_CLASSIFIER_MODEL}
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
       - REDIS_URL=redis://redis:6379/0
       - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/edson_portfolio

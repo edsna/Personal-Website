@@ -7,7 +7,7 @@ metadata:
     app: frontend
     tier: frontend
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: frontend
@@ -19,8 +19,8 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: your-registry/edson-portfolio-frontend:latest
-        imagePullPolicy: Always
+        image: edson-portfolio-frontend:latest
+        imagePullPolicy: Never
         ports:
         - containerPort: 3000
           name: http

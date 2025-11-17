@@ -18,8 +18,9 @@ def get_llm(
     Get LLM instance based on environment configuration
 
     Supports:
-    - Ollama (self-hosted)
-    - OpenAI (API)
+    - Ollama (self-hosted via OLLAMA_BASE_URL)
+    - OpenAI-compatible APIs (via OPENAI_BASE_URL, e.g., Open-World API)
+    - OpenAI (standard API)
     - Anthropic (API)
     """
 
@@ -45,16 +46,32 @@ def get_llm(
             logger.error("ollama_init_failed", error=str(e))
             # Fall through to OpenAI/Anthropic
 
-    # Fallback to OpenAI
+    # Check for OpenAI or OpenAI-compatible API (e.g., Open-World)
     openai_api_key = os.getenv("OPENAI_API_KEY")
     if openai_api_key:
         try:
-            logger.info("initializing_openai_llm", model="gpt-3.5-turbo")
-            return ChatOpenAI(
-                model=model_name or "gpt-3.5-turbo",
-                temperature=temperature,
-                max_tokens=max_tokens,
-            )
+            # Support custom base URL for OpenAI-compatible APIs
+            openai_base_url = os.getenv("OPENAI_BASE_URL")
+            openai_model = os.getenv("OPENAI_MODEL", "gpt-3.5-turbo")
+
+            kwargs = {
+                "model": model_name or openai_model,
+                "temperature": temperature,
+                "max_tokens": max_tokens,
+            }
+
+            # Add base_url if custom endpoint is specified
+            if openai_base_url:
+                kwargs["base_url"] = openai_base_url
+                logger.info(
+                    "initializing_openai_compatible_llm",
+                    base_url=openai_base_url,
+                    model=kwargs["model"],
+                )
+            else:
+                logger.info("initializing_openai_llm", model=kwargs["model"])
+
+            return ChatOpenAI(**kwargs)
         except Exception as e:
             logger.error("openai_init_failed", error=str(e))
 
@@ -66,7 +83,7 @@ def get_llm(
 def get_classifier_llm():
     """
     Get a small, fast LLM for classification tasks
-    Uses phi3:mini for Ollama or gpt-3.5-turbo for OpenAI
+    Uses phi3:mini for Ollama, tinyllama for Open-World, or gpt-3.5-turbo for OpenAI
     """
     ollama_base_url = os.getenv("OLLAMA_BASE_URL")
     classifier_model = os.getenv("OLLAMA_CLASSIFIER_MODEL", "phi3:mini")
@@ -87,13 +104,29 @@ def get_classifier_llm():
         except Exception as e:
             logger.error("classifier_ollama_init_failed", error=str(e))
 
-    # Fallback to OpenAI
+    # Fallback to OpenAI or OpenAI-compatible API
     openai_api_key = os.getenv("OPENAI_API_KEY")
     if openai_api_key:
-        return ChatOpenAI(
-            model="gpt-3.5-turbo",
-            temperature=0.0,
-            max_tokens=10,
-        )
+        openai_base_url = os.getenv("OPENAI_BASE_URL")
+        classifier_model = os.getenv("OPENAI_CLASSIFIER_MODEL", "gpt-3.5-turbo")
+
+        kwargs = {
+            "model": classifier_model,
+            "temperature": 0.0,
+            "max_tokens": 10,
+        }
+
+        if openai_base_url:
+            kwargs["base_url"] = openai_base_url
+            logger.info(
+                "initializing_classifier_llm",
+                provider="openai_compatible",
+                base_url=openai_base_url,
+                model=classifier_model,
+            )
+        else:
+            logger.info("initializing_classifier_llm", provider="openai", model=classifier_model)
+
+        return ChatOpenAI(**kwargs)
 
     return None

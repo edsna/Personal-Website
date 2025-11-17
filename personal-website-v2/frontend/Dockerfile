@@ -7,8 +7,8 @@ WORKDIR /app
 # Copy package files
 COPY package.json package-lock.json* ./
 
-# Install dependencies
-RUN npm ci --only=production
+# Install all dependencies (including dev for build)
+RUN npm ci
 
 # Stage 2: Builder
 FROM node:18-alpine AS builder
@@ -20,33 +20,29 @@ COPY --from=deps /app/node_modules ./node_modules
 # Copy application code
 COPY . .
 
-# Build Next.js application
+# Build Next.js application (this creates the 'out' directory)
 RUN npm run build
 
-# Stage 3: Runner (Production)
-FROM node:18-alpine AS runner
-WORKDIR /app
+# Stage 3: Runner (Production) - Serve static files
+FROM nginx:alpine
+WORKDIR /usr/share/nginx/html
 
-ENV NODE_ENV production
-ENV NEXT_TELEMETRY_DISABLED 1
+# Remove default nginx static assets
+RUN rm -rf ./*
 
-# Create non-root user
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+# Copy built Next.js static files
+COPY --from=builder /app/out .
 
-# Copy necessary files
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-
-# Set ownership
-RUN chown -R nextjs:nodejs /app
-
-USER nextjs
+# Copy nginx configuration for SPA
+RUN echo 'server { \
+    listen 3000; \
+    location / { \
+        root /usr/share/nginx/html; \
+        index index.html; \
+        try_files $uri $uri.html $uri/ /index.html; \
+    } \
+}' > /etc/nginx/conf.d/default.conf
 
 EXPOSE 3000
 
-ENV PORT 3000
-ENV HOSTNAME "0.0.0.0"
-
-CMD ["node", "server.js"]
+CMD ["nginx", "-g", "daemon off;"]
