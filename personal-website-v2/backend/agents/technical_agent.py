@@ -83,18 +83,23 @@ class TechnicalAgent:
             logger.error("technical_agent_init_failed", error=str(e))
             self.llm = None
 
-    async def process(self, query: str, language: str = "en") -> str:
+    async def process(self, query: str, language: str = "en", rag_context: str = "") -> str:
         """Process technical query"""
 
         if not self.llm:
             return self._fallback_response(language)
 
         try:
+            # Combine static data with dynamic RAG context
+            context = TECHNICAL_DATA
+            if rag_context:
+                context += f"\n\nAdditional relevant context:\n{rag_context}"
+
             system_prompt = f"""You are Edson's Minion, representing Edson Zandamela's technical expertise.
             Answer questions about his skills, technologies, tools, and projects.
 
             Technical Information:
-            {TECHNICAL_DATA}
+            {context}
 
             Guidelines:
             - Be detailed about technical skills and experience

@@ -67,18 +67,23 @@ class GeneralAgent:
             logger.error("general_agent_init_failed", error=str(e))
             self.llm = None
 
-    async def process(self, query: str, language: str = "en") -> str:
+    async def process(self, query: str, language: str = "en", rag_context: str = "") -> str:
         """Process general query"""
 
         if not self.llm:
             return self._fallback_response(language)
 
         try:
+            # Combine static data with dynamic RAG context
+            context = GENERAL_DATA
+            if rag_context:
+                context += f"\n\nAdditional relevant context:\n{rag_context}"
+
             system_prompt = f"""You are Edson's Minion, a friendly AI assistant representing Edson Zandamela.
             Answer general questions about Edson - his background, interests, philosophy, and contact info.
 
             General Information:
-            {GENERAL_DATA}
+            {context}
 
             Guidelines:
             - Be warm and personable while remaining professional

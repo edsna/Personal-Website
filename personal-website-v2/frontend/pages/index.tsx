@@ -1,11 +1,17 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
+import Navigation from '@/components/Navigation'
 import Terminal from '@/components/Terminal'
-import ChatBot from '@/components/ChatBot'
+import Experience from '@/components/Experience'
+import Skills from '@/components/Skills'
+import Certifications from '@/components/Certifications'
+import Portfolio from '@/components/Portfolio'
 import ConsultingServices from '@/components/ConsultingServices'
 import ContactForm from '@/components/ContactForm'
+import { achievements, initiatives } from '@/data/profile'
+import Link from 'next/link'
 
 // Dynamically import Three.js components (client-side only)
 const NeuralBackground = dynamic(() => import('@/components/NeuralBackground'), {
@@ -13,7 +19,29 @@ const NeuralBackground = dynamic(() => import('@/components/NeuralBackground'), 
 })
 
 export default function Home() {
-  const [activeSection, setActiveSection] = useState('terminal')
+  const [activeSection, setActiveSection] = useState('home')
+
+  // Track active section on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['home', 'experience', 'skills', 'certifications', 'consulting', 'portfolio', 'contact']
+      const scrollPosition = window.scrollY + 200
+
+      for (const section of sections) {
+        const element = document.getElementById(section)
+        if (element) {
+          const { offsetTop, offsetHeight } = element
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section)
+            break
+          }
+        }
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
     <>
@@ -21,7 +49,7 @@ export default function Home() {
         <title>Edson Zandamela - GenAI/MLOps Engineer</title>
         <meta
           name="description"
-          content="Senior AI Infrastructure Engineer specializing in LLMs, RAG systems, and scalable cloud platforms"
+          content="Senior AI Infrastructure Engineer specializing in LLMs, RAG systems, and scalable cloud platforms. Currently at Apple."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
@@ -29,16 +57,19 @@ export default function Home() {
       {/* Neural Network Particle Background */}
       <NeuralBackground />
 
+      {/* Navigation */}
+      <Navigation activeSection={activeSection} onNavigate={setActiveSection} />
+
       <main className="min-h-screen relative">
-        {/* Hero Section with Terminal */}
-        <section className="min-h-screen flex flex-col items-center justify-center px-4 py-12">
+        {/* Hero Section */}
+        <section id="home" className="min-h-screen flex flex-col items-center justify-center px-4 py-12 pt-24">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
             className="text-center mb-12"
           >
-            <h1 className="text-6xl md:text-8xl font-bold text-glow-blue mb-4">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-glow-blue mb-4">
               EDSON ZANDAMELA
             </h1>
             <p className="text-xl md:text-2xl text-neural-blue font-mono">
@@ -74,28 +105,37 @@ export default function Home() {
             >
               Schedule a Call
             </a>
-            <button
-              onClick={() => {
-                const chatSection = document.getElementById('chat')
-                chatSection?.scrollIntoView({ behavior: 'smooth' })
-              }}
-              className="btn-terminal"
-            >
-              Talk to Edson's Minion
-            </button>
+            <Link href="/chat" className="btn-terminal">
+              Chat with Minion 🤖
+            </Link>
+          </motion.div>
+
+          {/* Achievement Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-4xl"
+          >
+            {achievements.map((achievement) => (
+              <div key={achievement.label} className="text-center glass-strong rounded-lg p-4">
+                <p className="text-2xl md:text-3xl font-bold text-neural-blue">{achievement.value}</p>
+                <p className="text-gray-400 text-xs md:text-sm mt-1">{achievement.label}</p>
+              </div>
+            ))}
           </motion.div>
         </section>
 
-        {/* About Section */}
-        <section className="min-h-screen flex items-center justify-center px-4 py-12">
+        {/* About Section - Brief */}
+        <section className="py-16 px-4">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="max-w-5xl w-full glass-strong rounded-lg p-8 md:p-12"
+            className="max-w-5xl mx-auto glass-strong rounded-lg p-8 md:p-12"
           >
-            <h2 className="text-4xl font-bold text-neural-blue mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-neural-blue mb-6">
               About Me
             </h2>
             <div className="space-y-4 text-gray-300 text-lg leading-relaxed">
@@ -120,245 +160,105 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
-              <div className="text-center">
-                <p className="text-4xl font-bold text-neural-blue">5+</p>
-                <p className="text-gray-400 text-sm mt-2">Years Experience</p>
-              </div>
-              <div className="text-center">
-                <p className="text-4xl font-bold text-neural-green">$1.2M+</p>
-                <p className="text-gray-400 text-sm mt-2">Cost Savings</p>
-              </div>
-              <div className="text-center">
-                <p className="text-4xl font-bold text-neural-purple">90%</p>
-                <p className="text-gray-400 text-sm mt-2">Cloud Cost Reduction</p>
-              </div>
-              <div className="text-center">
-                <p className="text-4xl font-bold text-neural-blue">20+</p>
-                <p className="text-gray-400 text-sm mt-2">AI Certifications</p>
-              </div>
+            {/* Initiatives */}
+            <div className="mt-8 grid md:grid-cols-2 gap-4">
+              {initiatives.map((initiative) => (
+                <div key={initiative.name} className="bg-neural-blue/10 rounded-lg p-4">
+                  <span className="text-xs text-neural-green font-semibold">{initiative.type}</span>
+                  <h4 className="text-white font-bold mt-1">{initiative.name}</h4>
+                  <p className="text-gray-400 text-sm mt-1">{initiative.description}</p>
+                </div>
+              ))}
             </div>
           </motion.div>
         </section>
 
-        {/* Experience Timeline */}
-        <section className="min-h-screen flex items-center justify-center px-4 py-12">
+        {/* Experience Section */}
+        <section id="experience" className="py-16 px-4">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="max-w-5xl w-full"
+            className="max-w-5xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-neural-blue mb-12 text-center">
-              Experience Journey
-            </h2>
-
-            <div className="space-y-8">
-              {/* Apple */}
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                className="glass-strong rounded-lg p-6 border-l-4 border-neural-blue"
-              >
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                  <div>
-                    <h3 className="text-2xl font-bold text-white">
-                      Platform Infrastructure Engineer
-                    </h3>
-                    <p className="text-neural-blue font-semibold">Apple Inc.</p>
-                  </div>
-                  <p className="text-gray-400 text-sm">Apr 2025 - Present</p>
-                </div>
-                <ul className="space-y-2 text-gray-300">
-                  <li className="flex gap-2">
-                    <span className="text-neural-green">▸</span>
-                    <span>Optimized GPU infrastructure for Apple's internal LLM workloads (Siri, Maps)</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-neural-green">▸</span>
-                    <span>Identified $1.2M+ in annualized cost savings across multiple Kubernetes clusters</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-neural-green">▸</span>
-                    <span>Evaluated Apple Foundation Models and GenAI platforms</span>
-                  </li>
-                </ul>
-              </motion.div>
-
-              {/* Arcaea */}
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                className="glass-strong rounded-lg p-6 border-l-4 border-neural-green"
-              >
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                  <div>
-                    <h3 className="text-2xl font-bold text-white">DevOps Engineer</h3>
-                    <p className="text-neural-green font-semibold">Arcaea</p>
-                  </div>
-                  <p className="text-gray-400 text-sm">Aug 2023 - Mar 2025</p>
-                </div>
-                <ul className="space-y-2 text-gray-300">
-                  <li className="flex gap-2">
-                    <span className="text-neural-green">▸</span>
-                    <span>Architected enterprise AI platform using LLMs and RAG (20% efficiency gain)</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-neural-green">▸</span>
-                    <span>Reduced cloud costs by 90% through Kubernetes optimization</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-neural-green">▸</span>
-                    <span>Deployed scalable vector databases (Weaviate/Chroma) with LangChain</span>
-                  </li>
-                </ul>
-              </motion.div>
-
-              {/* Anagenex */}
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                className="glass-strong rounded-lg p-6 border-l-4 border-neural-purple"
-              >
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                  <div>
-                    <h3 className="text-2xl font-bold text-white">
-                      Software Engineer IT & DevOps
-                    </h3>
-                    <p className="text-neural-purple font-semibold">Anagenex</p>
-                  </div>
-                  <p className="text-gray-400 text-sm">Aug 2021 - Aug 2023</p>
-                </div>
-                <ul className="space-y-2 text-gray-300">
-                  <li className="flex gap-2">
-                    <span className="text-neural-green">▸</span>
-                    <span>Developed ML pipelines for drug discovery on AWS</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-neural-green">▸</span>
-                    <span>Automated data workflows reducing manual tasks by 50%</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-neural-green">▸</span>
-                    <span>Built Flask-based internal tools for cross-functional teams</span>
-                  </li>
-                </ul>
-              </motion.div>
-            </div>
+            <Experience />
           </motion.div>
         </section>
 
         {/* Skills Section */}
-        <section className="min-h-screen flex items-center justify-center px-4 py-12">
+        <section id="skills" className="py-16 px-4 bg-gradient-neural">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="max-w-5xl w-full"
+            className="max-w-6xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-neural-blue mb-12 text-center">
-              Technical Skills
-            </h2>
+            <Skills />
+          </motion.div>
+        </section>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              {/* Generative AI */}
-              <div className="glass-strong rounded-lg p-6">
-                <h3 className="text-2xl font-bold text-neural-green mb-4">Generative AI</h3>
-                <div className="flex flex-wrap gap-2">
-                  {['LLMs (OpenAI, Claude, Llama)', 'RAG', 'LangChain', 'LangGraph',
-                    'Vector Databases', 'Fine-Tuning', 'Multi-Agent Systems', 'Transformers'].map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-3 py-1 bg-neural-green/20 text-neural-green rounded-full text-sm border border-neural-green/50"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Cloud & Infrastructure */}
-              <div className="glass-strong rounded-lg p-6">
-                <h3 className="text-2xl font-bold text-neural-blue mb-4">
-                  Cloud & Infrastructure
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {['AWS', 'Kubernetes', 'Terraform', 'Docker', 'EKS', 'S3', 'Lambda',
-                    'Prometheus', 'Grafana'].map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-3 py-1 bg-neural-blue/20 text-neural-blue rounded-full text-sm border border-neural-blue/50"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Software Development */}
-              <div className="glass-strong rounded-lg p-6">
-                <h3 className="text-2xl font-bold text-neural-purple mb-4">
-                  Software Development
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {['Python', 'JavaScript', 'TypeScript', 'FastAPI', 'React', 'Next.js',
-                    'REST APIs', 'Microservices'].map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-3 py-1 bg-neural-purple/20 text-neural-purple rounded-full text-sm border border-neural-purple/50"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* CI/CD & Automation */}
-              <div className="glass-strong rounded-lg p-6">
-                <h3 className="text-2xl font-bold text-neural-green mb-4">
-                  CI/CD & Automation
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {['GitHub Actions', 'GitLab CI', 'ArgoCD', 'Helm', 'Jenkins',
-                    'Bash', 'Python Scripts'].map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-3 py-1 bg-neural-green/20 text-neural-green rounded-full text-sm border border-neural-green/50"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
+        {/* Certifications Section */}
+        <section id="certifications" className="py-16 px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="max-w-6xl mx-auto"
+          >
+            <Certifications />
           </motion.div>
         </section>
 
         {/* Consulting Services Section */}
-        <section className="min-h-screen flex items-center justify-center px-4 py-12 bg-gradient-neural">
-          <div className="max-w-7xl w-full">
+        <section id="consulting" className="py-16 px-4 bg-gradient-neural">
+          <div className="max-w-7xl mx-auto">
             <ConsultingServices language="en" />
           </div>
         </section>
 
-        {/* Chat Section */}
-        <section id="chat" className="min-h-screen flex items-center justify-center px-4 py-12">
+        {/* Portfolio Section */}
+        <section id="portfolio" className="py-16 px-4">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="w-full"
+            className="max-w-6xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-neural-blue mb-8 text-center">
-              Chat with Edson's Minion 🤖
+            <Portfolio />
+          </motion.div>
+        </section>
+
+        {/* Chat CTA Section */}
+        <section className="py-16 px-4 bg-gradient-neural">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="max-w-3xl mx-auto text-center"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-neural-blue mb-4">
+              Want to Know More?
             </h2>
-            <ChatBot language="en" />
+            <p className="text-gray-400 mb-8">
+              Chat with my AI assistant to learn more about my experience, skills, and how I can help your team.
+            </p>
+            <Link
+              href="/chat"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-neural-green to-neural-blue rounded-lg text-white font-medium hover:opacity-90 transition-opacity"
+            >
+              <span className="text-xl">🤖</span>
+              Chat with Edson's Minion
+            </Link>
           </motion.div>
         </section>
 
         {/* Contact Section */}
-        <section className="min-h-screen flex items-center justify-center px-4 py-12">
+        <section id="contact" className="py-16 px-4">
           <ContactForm language="en" />
         </section>
 
@@ -400,7 +300,7 @@ export default function Home() {
             </div>
 
             <div className="mt-8 text-center text-gray-500 text-sm">
-              <p>© 2025 Edson Zandamela. Built with Next.js, Three.js, and GenAI ❤️</p>
+              <p>© 2025 Edson Zandamela. Built with Next.js, Three.js, and GenAI</p>
             </div>
           </div>
         </footer>

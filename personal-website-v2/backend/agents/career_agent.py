@@ -81,18 +81,23 @@ class CareerAgent:
             logger.error("career_agent_init_failed", error=str(e))
             self.llm = None
 
-    async def process(self, query: str, language: str = "en") -> str:
+    async def process(self, query: str, language: str = "en", rag_context: str = "") -> str:
         """Process career-related query"""
 
         if not self.llm:
             return self._fallback_response(language)
 
         try:
+            # Combine static career data with dynamic RAG context
+            context = CAREER_DATA
+            if rag_context:
+                context += f"\n\nAdditional relevant context:\n{rag_context}"
+
             system_prompt = f"""You are Edson's Minion, an AI assistant representing Edson Zandamela.
             Answer questions about Edson's career, work experience, and professional background.
 
             Use this career information:
-            {CAREER_DATA}
+            {context}
 
             Guidelines:
             - Be professional but friendly

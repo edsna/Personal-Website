@@ -8,6 +8,7 @@ from langchain.prompts import ChatPromptTemplate
 from pydantic import BaseModel
 
 from utils.llm_provider import get_classifier_llm
+from utils.rag_system import get_rag_system
 from .career_agent import CareerAgent
 from .technical_agent import TechnicalAgent
 from .general_agent import GeneralAgent
@@ -39,6 +40,9 @@ class SupervisorAgent:
             # Initialize routing LLM (uses classifier - small and fast)
             self.llm = get_classifier_llm()
 
+            # Initialize RAG system for knowledge retrieval
+            self.rag_system = get_rag_system()
+
             # Initialize specialized agents
             self.career_agent = CareerAgent()
             self.technical_agent = TechnicalAgent()
@@ -49,9 +53,13 @@ class SupervisorAgent:
             else:
                 logger.warning("supervisor_initialized_without_llm")
 
+            if self.rag_system.vectorstore:
+                logger.info("supervisor_rag_enabled")
+
         except Exception as e:
             logger.error("supervisor_init_failed", error=str(e))
             self.llm = None
+            self.rag_system = None
 
     async def route_query(self, query: str) -> str:
         """
@@ -119,15 +127,22 @@ class SupervisorAgent:
             # Route query to appropriate agent
             route = await self.route_query(query)
 
-            # Process with selected agent
+            # Get RAG context for enhanced responses
+            rag_context = ""
+            if self.rag_system:
+                rag_context = self.rag_system.get_context_for_query(query, max_tokens=800)
+                if rag_context:
+                    logger.info("rag_context_retrieved", query=query[:50], context_len=len(rag_context))
+
+            # Process with selected agent (pass RAG context)
             if route == "career":
-                response = await self.career_agent.process(query, language)
+                response = await self.career_agent.process(query, language, rag_context)
                 agent_used = "career_agent"
             elif route == "technical":
-                response = await self.technical_agent.process(query, language)
+                response = await self.technical_agent.process(query, language, rag_context)
                 agent_used = "technical_agent"
             else:
-                response = await self.general_agent.process(query, language)
+                response = await self.general_agent.process(query, language, rag_context)
                 agent_used = "general_agent"
 
             # Estimate tokens (rough approximation)
