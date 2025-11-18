@@ -18,6 +18,8 @@ langchain-core==0.2.38
 langchain-text-splitters==0.2.2
 # Ollama support
 ollama==0.3.1
+# Vector database for RAG
+chromadb==0.4.24
 
 # LLM Providers (langchain-openai requires openai)
 openai==1.40.0

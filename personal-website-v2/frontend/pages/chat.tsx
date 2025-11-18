@@ -292,7 +292,7 @@ Ask me anything about Edson's professional background!`,
                     <p className="text-gray-400 text-xs">Certs</p>
                   </div>
                   <div className="bg-neural-blue/10 rounded p-2 text-center">
-                    <p className="text-neural-blue font-bold">3</p>
+                    <p className="text-neural-blue font-bold">2</p>
                     <p className="text-gray-400 text-xs">Masters</p>
                   </div>
                 </div>
